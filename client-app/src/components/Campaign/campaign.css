@@ -1,0 +1,59 @@
+.campaign {
+  padding: 1rem;
+  background: rgb(231, 231, 231);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease-out, box-shadow 0.1s;
+  will-change: opacity, visibility;
+  min-width: 30vw;
+}
+
+.active {
+  cursor: pointer;
+}
+
+.active:hover {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.active:active {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.campaign-inner-wrapper {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.campaign-title {
+  text-transform: uppercase;
+}
+
+.fraud {
+    border: 1px solid red;
+    position: relative;
+}
+
+.fraud span {
+    color: red;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    text-transform: uppercase;
+    font-weight: 500;
+    transform: translateX(-50%);
+}
+
+.successful {
+    background: rgba(0, 128, 0, 0.122);
+    border: 1px solid green;
+}
+
+.is-visible {
+  opacity: 1;
+  visibility: visible;
+}

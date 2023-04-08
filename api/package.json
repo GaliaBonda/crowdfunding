@@ -1,0 +1,17 @@
+{
+  "name": "node_study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "server": "nodemon index.mjs",
+    "run:docker": "docker-compose -f docker-compose.local.yaml up -d",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22"
+  }
+}

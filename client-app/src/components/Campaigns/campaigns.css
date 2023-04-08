@@ -1,0 +1,6 @@
+.campaigns-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
