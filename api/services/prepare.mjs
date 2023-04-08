@@ -1,6 +1,5 @@
-import { addDonator, getAllDonatorsDonations, markDonatorFraud } from "./donator.service.mjs";
+import { addDonator} from "./donator.service.mjs";
 import { addCampaign } from "./campaign.service.mjs";
-import { addDonation } from "./donation.service.mjs";
 
 const donators = ["user1", "user2", "user3", "user4"];
 const campaigns = [
@@ -24,21 +23,21 @@ const campaigns = [
 export const prepare = async (db) => {
   db.query(
     "CREATE DATABASE IF NOT EXISTS crowdfunding",
-    function (err, result, fields) {
+    function (err) {
       if (err) throw err;
-      // console.log(result);
     }
   );
+
   const donatorsTableCreationQuery = `CREATE TABLE IF NOT EXISTS donators (
         username VARCHAR(255) NOT NULL, 
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`;
 
-  db.query(donatorsTableCreationQuery, function (err, result, fields) {
+  db.query(donatorsTableCreationQuery, function (err) {
     if (err) throw err;
-    // console.log(result);
   });
+
   const campaignsTableCreationQuery = `CREATE TABLE IF NOT EXISTS campaigns (
         name VARCHAR(255) NOT NULL, 
         description VARCHAR(255),
@@ -47,9 +46,9 @@ export const prepare = async (db) => {
         status ENUM('active', 'fraud', 'successful') DEFAULT 'active' NOT NULL, 
         id VARCHAR(255) NOT NULL PRIMARY KEY, 
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`;
-  db.query(campaignsTableCreationQuery, function (err, result, fields) {
+
+  db.query(campaignsTableCreationQuery, function (err) {
     if (err) throw err;
-    // console.log(result);
   });
 
   const donationsTableCreationQuery = `CREATE TABLE IF NOT EXISTS donations ( 
@@ -69,8 +68,6 @@ export const prepare = async (db) => {
 
   db.query(donationsTableCreationQuery, function (err, result, fields) {
     if (err) throw err;
-    // console.log(result);
-    // db.end();
   });
 
   for (const donator of donators) {
@@ -87,15 +84,5 @@ export const prepare = async (db) => {
       console.error(error);
     } catch (error) {}
   }
-
-  try {
-//   await addDonation(db, {amount: 300, username: 'user2', campaign_id: 'bc0a7d33-a427-47d4-ac82-cd16dc19f886'})
-  // await getAllDonatorsDonations(db, '2');
-  // await markDonatorFraud(db, 'user1');
-    
-  } catch (error) {
-    console.error(error)
-  }
-
-//   db.end();
+  
 };

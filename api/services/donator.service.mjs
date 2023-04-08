@@ -44,14 +44,12 @@ export const getAllDonatorsDonations = async (db, donator_id) => {
     (campaigns.id = donations.campaign_id)
     WHERE donators.id = ${donator_id}
   `;
-//   WHERE username = ${username}
   const allDonations = await db.query(allDonationsQuery);
   return allDonations;
 };
 
 export const markDonatorFraud = async (db, username) => {
   const donator = (await getDonatorByName(db, username))?.[0];
-  // console.log(donator)
     const allDonations = await getAllDonatorsDonations(db, donator.id);
     for (const donation of allDonations) {
         await updateCampaignStatus(db, donation.campaign_id, 'fraud');

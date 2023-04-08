@@ -10,14 +10,10 @@ const db = makeDb();
 try {
   await prepare(db);
   createCrowfundingServer();
-  // do something with someRows and otherRows
 } catch (err) {
-  // handle the error
 } finally {
   await db.close();
 }
-
-// await prepare(db);
 
 createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -83,14 +79,7 @@ createServer(async (req, res) => {
       }
       return;
     }
-  //   if (req.method === "GET" && req.url === '/campaigns') {
-  //    //   db.query("INSERT INTO donators (username, id) VALUES (?, ?)",  ['user2', 2], (err, data) => {
-  //    //      res.end(JSON.stringify(data));
-  //    //   })
-  //     // res.end("Hello world");
-  //     return;
-  //   }
 
   res.statusCode = 404;
   res.end("NOT FOUND");
-}).listen(3000);
+}).listen(3001);

@@ -33,14 +33,15 @@ export const Modal = ({ onClose, campaignId, setCampaignsList }) => {
     e.preventDefault();
     const username = e.target[0].value;
     const donate = e.target[1].value;
-    const userNameValidation = username.match(/^[a-z0-9_ ]+$/gi) && username.length > 2;
-    const donationSumValidation = donate >= 0;
-    if (!userNameValidation || donationSumValidation) {
+    const userNameValidation =
+      username.match(/^[a-z0-9_ ]+$/gi) && username.length > 2;
+    const donationSumValidation = +donate >= 0;
+    if (!userNameValidation || !donationSumValidation) {
       if (!userNameValidation)
         setErrorTooltip((prev) => {
           return { ...prev, username: true };
         });
-      if (donationSumValidation) {
+      if (!donationSumValidation) {
         setErrorTooltip((prev) => {
           return { ...prev, amount: true };
         });
@@ -86,7 +87,7 @@ export const Modal = ({ onClose, campaignId, setCampaignsList }) => {
               <label htmlFor="" className="modal-label">
                 <span>Sum to donate:</span>
                 {errorTooltip.amount && (
-                  <span className="error-tooltip">Invalid dination sum</span>
+                  <span className="error-tooltip">Invalid donation sum</span>
                 )}
                 <input
                   className={`modal-input amount-input ${
@@ -100,8 +101,11 @@ export const Modal = ({ onClose, campaignId, setCampaignsList }) => {
               <div className="buttons-wrapper">
                 <button
                   className="modal-button"
-                  type="submit"
-                  onClick={() => onClose()}
+                  onClick={(e) => {
+                    // e.preventDefault();
+                    e.stopPropagation();
+                    onClose();
+                  }}
                 >
                   Close
                 </button>

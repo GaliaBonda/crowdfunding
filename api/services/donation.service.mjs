@@ -8,6 +8,7 @@ import { addDonator, getDonatorByName } from "./donator.service.mjs";
 export const addDonation = async (db, donation) => {
   let donator_id;
   const { amount, username, campaign_id } = donation;
+
   // English letters, digits, and underscores
   if (!username.match(/^[a-z0-9_ ]+$/gi)) throw new Error("username invalid");
   const campaign = await getCampaignById(db, campaign_id);
@@ -19,10 +20,8 @@ export const addDonation = async (db, donation) => {
   
   if (!donator_id) {
     const newDonator = (await addDonator(db, username))?.[0];
-    console.log(newDonator)
     donator_id = newDonator?.id;
   }
-  console.log(donator_id)
 
   const newDonation = await addDonationToDb(db, {
     amount,
@@ -42,7 +41,6 @@ const addDonationToDb = async (db, donation) => {
   );
 
   const newDonation = await db.query('SELECT * FROM donations where id = LAST_INSERT_ID()');
-  console.log(newDonation)
 
   const campaign = (await getCampaignById(db, campaign_id))?.[0];
 
@@ -50,7 +48,6 @@ const addDonationToDb = async (db, donation) => {
   const updatedCampaign = (await getCampaignById(db, campaign_id))?.[0];
 
   if (updatedCampaign.amount >= updatedCampaign.goal) {
-    console.log("change status to success");
     await updateCampaignStatus(db, campaign_id, "successful");
   }
 

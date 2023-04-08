@@ -14,7 +14,7 @@ export const Campaigns = () => {
 
   return (
     <ul className="campaigns-list">
-      {campaignsList.map(({ name, goal, amount, id, status, description }) => {
+      {campaignsList.sort((c1, c2) => c2.goal - c1.goal).map(({ name, goal, amount, id, status, description }) => {
         return (
           <Campaign name={name} goal={goal} amount={amount} key={id} status={status} description={description} id={id} setCampaignsList={setCampaignsList}/>
         );

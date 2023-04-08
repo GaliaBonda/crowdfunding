@@ -2,7 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import { Modal } from "../Modal/Modal";
 import "./campaign.css";
 
-export const Campaign = ({ name, goal, amount, id, status, description, setCampaignsList }) => {
+export const Campaign = ({
+  name,
+  goal,
+  amount,
+  id,
+  status,
+  description,
+  setCampaignsList,
+}) => {
   const [isVisible, setVisible] = useState(false);
   const [modalIsShown, setModalIsShown] = useState(false);
 
@@ -36,16 +44,20 @@ export const Campaign = ({ name, goal, amount, id, status, description, setCampa
     >
       <div className="campaign-inner-wrapper">
         <h3 className="campaign-title">{name}</h3>
-        <div>
-          <p>Goal: ${goal}</p>
-          <p>Raised: ${amount}</p>
+        <div className="campaign-info">
+          <p>
+            Goal: <span>${goal}</span>
+          </p>
+          <p>
+            Raised: <span>${amount}</span>
+          </p>
         </div>
       </div>
       {description && <p>{description}</p>}
       {status === "fraud" && <span>fraud</span>}
       {modalIsShown && (
         <Modal
-        campaignId={id}
+          campaignId={id}
           onClose={() => {
             setModalIsShown(false);
           }}
